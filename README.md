@@ -13,6 +13,6 @@ Para a aplicar o algoritmo do caixeiro viajante foi idealizado pela equipe um pr
 
 ## Autores
 
-- [**Jean Cavalcante Ribeiro**](https://github.com/Kaseioo)
+- [**Kaseioo**](https://github.com/Kaseioo)
 - [**Leandro De Meirelles**](https://github.com/droanle)
 - [**Marcelo Gonçalves**](https://github.com/MarceloStudies)
