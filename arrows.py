@@ -106,13 +106,14 @@ while(size > 5):
     for h in range(0, len(xxx)):
         index = randint(0, size)
         target = available_nodes[index]
+        if target['x'] == xxx[h] and target['y'] == yyy[h]: continue
         size -= 1
         print(target['x'])
         plt.arrow(xxx[h], yyy[h], target['x'] - xxx[h], target['y'] - yyy[h], color='red', head_width=0.25, head_length=0.5, head_starts_at_zero=False)
         plt.scatter(xxx[h], yyy[h], color='green')
         plt.scatter(target['x'], target['y'], color='blue')
         count += 1
-        if count >= 1: break # change to increase arrows
+        if count >= 5: break # change to increase arrows
     if count >= 1: break
         
 plt.show()
