@@ -100,33 +100,66 @@ for node in available_nodes:
     xxx.append(node['x'])
     yyy.append(node['y'])
     
-size = len(available_nodes)
-count = 0
-h = 0;
-target_index = -1
-coun = 0
-ban_x = []
-ban_y = []
-while(size > 5):    
-    index = randint(0, size)
-    target = available_nodes[index]
-    target_index = available_nodes.index(target)
-    if target['x'] in ban_x and target['y'] in ban_y:
-        continue
-    if target['x'] == xxx[h] and target['y'] == yyy[h]: continue
-    ban_x.append(xxx[h])
-    ban_y.append(yyy[h])
-    coun += 1
-    size -= 1
-
-    plt.plot([xxx[h], target['x']], [yyy[h], target['y']], color='red')
-    #plt.arrow(xxx[h], yyy[h], target['x'] - xxx[h], target['y'] - yyy[h], color='red', head_width=0.25, head_length=0.5, head_starts_at_zero=False)
-    plt.scatter(xxx[h], yyy[h], color='green')
-    plt.scatter(target['x'], target['y'], color='blue')
-
-    plt.annotate(coun, xy = (target['x'] + 0.15, target['y']))
-    count += 1
-    h = target_index
-    if count >= 7: break # change to increase arrows
+def path():
+    size = len(available_nodes)
+    count = 0
+    h = 0;
+    target_index = -1
+    coun = 0
+    ban_x = []
+    ban_y = []
+    vertex = []
+    while(size > 5):    
+        index = randint(0, size)
+        target = available_nodes[index]
+        target_index = available_nodes.index(target)
+        if target['x'] in ban_x and target['y'] in ban_y:
+            continue
+        if target['x'] == xxx[h] and target['y'] == yyy[h]: continue
+        ban_x.append(xxx[h])
+        ban_y.append(yyy[h])
+        if xxx[h] > target['x']:
+            furthest_x = xxx[h]
+            closest_x = target['x']
+        else:
+            furthest_x = target['x']
+            closest_x = xxx[h]
+        x_weight = furthest_x - closest_x
+     
+        if yyy[h] > target['y']:
+            furthest_y = yyy[h]
+            closest_y = target['y']
+        else:
+            furthest_y = target['y']
+            closest_y = yyy[h]
+            
+        y_weight = furthest_y - closest_y
+        vertex_weight = (x_weight + y_weight)/2
         
+        vertex.append(vertex_weight)
+        coun += 1
+        size -= 1
+    
+        plt.plot([xxx[h], target['x']], [yyy[h], target['y']], color='red')
+        #plt.arrow(xxx[h], yyy[h], target['x'] - xxx[h], target['y'] - yyy[h], color='red', head_width=0.25, head_length=0.5, head_starts_at_zero=False)
+        plt.scatter(xxx[h], yyy[h], color='green')
+        plt.scatter(target['x'], target['y'], color='blue')
+    
+        plt.annotate(coun, xy = (target['x'] + 0.15, target['y']))
+        count += 1
+        h = target_index
+        if count >= 7: break # change to increase arrows
+    return vertex
+
+vertex = path()
+total_weight = 100
+ccc = 0
+while total_weight > 2.5 and ccc < 20:
+    ccc += 1
+    for v in vertex:
+        total_weight += v
+    total_weight = total_weight/len(vertex)
+    print(total_weight)
+
+print('best', total_weight, 'found in', ccc, 'cycles')
 plt.show()
