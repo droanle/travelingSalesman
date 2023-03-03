@@ -40,6 +40,11 @@ clock = pygame.time.Clock()
 current_cycle = 0
 coords = '0, 10'
 nodes = []
+
+font = pygame.font.SysFont(None, 18)
+
+info_string = 'Left mouse creates a node. Right mouse toggles connections. Middle mouse (scroll click) resets.'
+render_connections = True
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -47,22 +52,38 @@ while run:
             pygame.quit()
             run = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-            current_cycle += 1
             coords = event.pos
-            nodes.append(coords)
-            print(nodes)
-            
+            mouse_button = event.button
+            if mouse_button == 1:
+                nodes.append(coords)
+            elif mouse_button == 2:
+                nodes = []
+            elif mouse_button == 3:
+                current_cycle += 1
+                render_connections = not render_connections
+                
+            print(event.button)
             
     screen.fill((0, 0, 0))
  
     fps.render(screen, 10, 10)
-    fps.render(screen, width - 50, 10, current_cycle)
-    fps.render(screen, round(width/2) - 50, 10, coords)
+    total_nodes = len(nodes)
+    connections     =   ((total_nodes * (total_nodes - 1))/2)
+    concordance     = ' node, ' if total_nodes == 1 else ' nodes, '
+    concordance2    = ' connection ' if connections == 1 else ' connections '
+    
+    fps.render(screen, (width /2) + 50, 10, str(total_nodes) + concordance + str(round(connections)) + concordance2)
+    fps.render(screen, round(width/2) - 150, 10, coords)
+    
+    img = font.render(info_string, True, (255, 255, 255))
+    rect = img.get_rect()
+    screen.blit(img, (10, 40))
     
     for point in nodes:
         pygame.draw.circle(screen, (255, 0, 0), point, 5)
-        for node in nodes:
-            pygame.draw.line(screen, (128, 64, 255), point, node, 2)
+        if render_connections:    
+            for node in nodes:
+                pygame.draw.line(screen, (128, 64, 255), point, node, 2)
     
     pygame.display.update()
     fps.clock.tick(30)
