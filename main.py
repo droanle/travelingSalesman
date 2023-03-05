@@ -35,15 +35,17 @@ display.update()
 
 ADD_NODE = 1
 
+counter = 0
 while True:
+    counter += 1
     event_handler.update()
     if(event_handler.proccess_events()):
         print(event_handler.get_events())
-    print(display.get_fps())
+    
+
     # display.render_surfaces('clean_components')
     fps.set_text(str(round(display.get_fps(), 2)) + ' fps')
     
     display.fill('components', GRAY, fps.get_x(), fps.get_x(), fps.get_width() + 5, fps.get_height())
     display.update_component('fps', fps)
-    display.update('components')
-    display.tick(100000)
+    display.tick(1000)

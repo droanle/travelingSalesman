@@ -29,6 +29,9 @@ class TextComponent:
     def get_height(self):
         return self.component.get_height()
     
+    def get_bounds(self, width_offset = 5, height_offset = 0):
+        return (self.get_x(), self.get_y(), self.get_width() + width_offset, self.get_height() + height_offset)
+    
     
 class Component:
     def __init__(self, element, position, color = (0, 0, 0)):

@@ -232,6 +232,7 @@ while run:
     
     screen.fill((0, 0, 0), (0, 0, 100, 33))
     fps.render(screen, 10, 10)
+
     pygame.display.update()
     fps.clock.tick(10000)
     
