@@ -73,7 +73,7 @@ def render_line(coords):
         
 
 tsp_timed_out = False
-tsp_limit = 15
+tsp_limit = 150
 def travelling_salesman():
     distances = {}
     for node1, node2 in itertools.combinations(nodes, 2):
@@ -180,6 +180,7 @@ while run:
                         fps.render(screen, 0, 102, 'TSP runtime: ' + str(round(ran, 4)) + 's')
                         screen.fill((128, 128, 128), (0, 122, width, 25))
                         fps.render(screen, 0, 122, 'Initial distance: ' + str(round(first_distance, 4)))
+
                         
                         screen.fill((0, 0, 0), (0, 0, width, 80))
                         total_nodes = len(nodes)
@@ -198,6 +199,8 @@ while run:
                         
                         fps.render(screen, width/2, 102, 'Searched paths ' + str(times) + ' times.')
                         fps.render(screen, width/2, 122, 'Distance: ' + str(round(shortest_distance, 4)))
+                        
+
                         if(ran > tsp_limit):
                             tsp_timed_out = True
                             break
@@ -206,14 +209,21 @@ while run:
 
                         for node in nodes:
                             render_line(node)
+
                         if(len(shortest_path) > 1):
                             for i in range(len(shortest_path)-1):
                                 pygame.draw.line(lines_surface, (32, 32, 255), shortest_path[i], shortest_path[i+1], 2)
                                 if times > 2:
                                     if path[len(path) - 1] is not shortest_path[0] and path[len(path) - 2] is not shortest_path[1]: 
                                         pygame.draw.line(lines_surface, (255, 0, 0), path[len(path) - 1], path[len(path) - 2], 2)
+                                        pygame.draw.circle(points_surface, (128, 255, 0), path[len(path) - 2], 5)
+                                        pygame.draw.circle(points_surface, (255, 255, 255), path[len(path) - 1], 5)
+                                        
                     
                         screen.blit(lines_surface, (0, 0))
+                        screen.blit(points_surface, (0, 0))
+                        for node in nodes:
+                            render_point(node)
                         for node in range(len(nodes)):
                             x = nodes[node][0]
                             y = nodes[node][1]
