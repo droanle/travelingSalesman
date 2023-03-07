@@ -170,8 +170,8 @@ while run:
                         if distance < shortest_distance:
                             shortest_distance = distance
                             shortest_path = path
-                            
 
+                            
                             
                         current_time = time.time()
                         ran = current_time - start_time
@@ -203,11 +203,15 @@ while run:
                             break
                         
                         lines_surface.fill((0, 0, 0, 0))
+
                         for node in nodes:
                             render_line(node)
                         if(len(shortest_path) > 1):
                             for i in range(len(shortest_path)-1):
                                 pygame.draw.line(lines_surface, (32, 32, 255), shortest_path[i], shortest_path[i+1], 2)
+                                if times > 2:
+                                    if path[len(path) - 1] is not shortest_path[0] and path[len(path) - 2] is not shortest_path[1]: 
+                                        pygame.draw.line(lines_surface, (255, 0, 0), path[len(path) - 1], path[len(path) - 2], 2)
                     
                         screen.blit(lines_surface, (0, 0))
                         for node in range(len(nodes)):
@@ -215,6 +219,7 @@ while run:
                             y = nodes[node][1]
                             fps.render(screen, x, y, node)
                         pygame.display.update()
+                    
                     if tsp_timed_out or exit_tsp:
                         screen.fill((128, 128, 128), (0, 122, width, 25))
                         fps.render(screen, 0, 122, 'TSP: forced exit with best path as ' + str(round(shortest_distance, 4)))
@@ -295,6 +300,9 @@ while run:
                         if(len(shortest_path) > 1):
                             for i in range(len(shortest_path)-1):
                                 pygame.draw.line(lines_surface, (32, 32, 255), shortest_path[i], shortest_path[i+1], 2)
+                                if times > 2:
+                                    if path[len(path) - 1] is not shortest_path[0] and path[len(path) - 2] is not shortest_path[1]: 
+                                        pygame.draw.line(lines_surface, (255, 0, 0), path[len(path) - 1], path[len(path) - 2], 2)
     
                         screen.blit(lines_surface, (0, 0))
                         for node in range(len(nodes)):
