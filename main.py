@@ -12,17 +12,4 @@ app.register_blueprint(Router)
 
 if __name__ == '__main__':
   app.app_context().push()
-  app.run(debug=True, host='0.0.0.0', port=5000)
-
-# from Environment import Environment
-# from HillClimb import HillClimb
-
-# environment = Environment(6, 10, 351, 150)
-
-# environment.create_environment()
-
-# hillClimb = HillClimb(environment)
-
-# hillClimb.hill_climb()
-
-# hillClimb.print()
+  app.run(debug=True, host='0.0.0.0', port=5001)

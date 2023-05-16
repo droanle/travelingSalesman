@@ -1,431 +1,106 @@
-<body>
-  <div id="ivpq" class="gjs-row">
-      <div id="iumi" class="gjs-cell">
-          <div id="iyvn">Trem Viajante
-          </div>
-          <div id="i8u2" class="gjs-row">
-              <div id="ig0g" class="gjs-cell">
-                  <div id="i9ck">Métodos:
-                  </div>
-                  <div id="iirwi" class="gjs-row">
-                      <div id="i59fd" class="gjs-cell">
-                          <div class="gjs-cell" id="ihnrj">
-                              <img src="https://i.imgur.com/tr4aSrp.png"
-                                  id="ibqbh"/>
-                              <div id="imxmj">Subida de encosta
-                              </div>
-                          </div>
-                      </div>
-                      <div class="gjs-cell" id="ihqmx">
-                          <div class="gjs-cell" id="ixkyf">
-                              <img src="https://i.imgur.com/tr4aSrp.png"
-                                  id="iqce3"/>
-                              <div id="i8251">Subida de encosta alternada
-                              </div>
-                          </div>
-                          <div class="gjs-cell" id="idnao">
-                              <div id="iab1h">Tentativas:
-                              </div>
-                              <input type="text" id="iwtzr"/>
-                          </div>
-                      </div>
-                      <div class="gjs-cell" id="ib4ft">
-                          <div class="gjs-cell" id="i0bpt">
-                              <img src="https://i.imgur.com/tr4aSrp.png"
-                                  id="idb1n"/>
-                              <div id="i9fiq">Tempera simulada
-                              </div>
-                          </div>
-                          <div class="gjs-cell" id="iyzli">
-                              <div id="iryyf">Temperatura inicial:
-                              </div>
-                              <input type="text" id="iqejc"/>
-                          </div>
-                          <div class="gjs-cell" id="in2xe">
-                              <div id="ihmp9">Numero de interações:
-                              </div>
-                              <input type="text" id="isq56"/>
-                          </div>
-                          <div class="gjs-cell" id="iz1mf">
-                              <div id="iwoon">Fator redutor:
-                              </div>
-                              <input type="text" id="igmrl"/>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="gjs-row" id="iy60k">
-                  <div class="gjs-cell" id="iovdx">
-                      <div class="gjs-row" id="i99h1">
-                          <div class="gjs-cell" id="i00e6">
-                            <div id="plotly"></div>
-                          </div>
-                          <div class="gjs-cell" id="ixtnf">
-                              <div id="ixsw5">Tamanho de plano:
-                              </div>
-                              <input type="text" id="ig71d"/>
-                              <div id="i70n6">Numero de pontos:
-                              </div>
-                              <input type="text" id="iefjh"/>
-                              <div id="iod3h">Seed:
-                              </div>
-                              <input type="text" id="iys3d"/>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="gjs-cell" id="iyve1">
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</body>
-<style>* {
-box-sizing: border-box;
-}
-body {
-  margin: 0;
-}
-*{
-  box-sizing:border-box;
-}
-body{
-  margin:0;
-}
-.gjs-row{
-  display:flex;
-  justify-content:flex-start;
-  align-items:stretch;
-  flex-wrap:nowrap;
-  padding:10px;
-}
-.gjs-cell{
-  min-height:75px;
-  flex-grow:1;
-  flex-basis:100%;
-}
-#ig0g{
-  border:2.5px solid #151515;
-  width:40%;
-  flex:1 0 40%;
-}
-#i8u2{
-  width:75%;
-  height:75%;
-  position:relative;
-  border-radius:15px 15px 15px 15px;
-  border:5px solid black;
-}
-#ivpq{
-  position:absolute;
-  width:100%;
-  height:100%;
-}
-#iumi{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-}
-#iyvn{
-  padding:10px;
-  margin:0 0 25px 0;
-  font-family:Times New Roman, Times, serif;
-  font-size:35px;
-  text-decoration:underline;
-}
-#i9ck{
-  padding:10px;
-  font-size:30px;
-}
-#iirwi{
-  align-items:stretch;
-  flex-direction:column;
-}
-#i59fd{
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-  min-height:0px;
-  padding:5px 0px 5px 25px;
-  flex-direction:column;
-  border:1px solid rgba(0,0,0,0.75);
-  border-radius:10px 10px 10px 10px;
-}
-#ihqmx{
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-  min-height:0px;
-  padding:5px 0px 5px 25px;
-  flex-direction:column;
-  margin:5px 0px 5px 0px;
-  border:1px solid rgba(0,0,0,0.75);
-  border-radius:10px 10px 10px 10px;
-}
-#iqce3{
-  color:black;
-  width:25px;
-  height:25px;
-}
-#i8251{
-  padding:0px 0 0px 10px;
-  font-size:20px;
-}
-#ixkyf{
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  min-height:0px;
-  padding:5px 0px 5px 0px;
-  width:100%;
-}
-#ibqbh{
-  color:black;
-  width:25px;
-  height:25px;
-}
-#imxmj{
-  padding:0px 0 0px 10px;
-  font-size:20px;
-}
-#ihnrj{
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  min-height:0px;
-  padding:5px 0px 5px 0px;
-  width:100%;
-}
-#idb1n{
-  color:black;
-  width:25px;
-  height:25px;
-}
-#i9fiq{
-  padding:0px 80px 0px 10px;
-  font-size:20px;
-}
-#i0bpt{
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  min-height:0px;
-  padding:5px 0px 5px 0px;
-  width:100%;
-}
-#iryyf{
-  font-size:20px;
-  padding:0 0 0 0px;
-}
-#iqejc{
-  width:60px;
-}
-#iyzli{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  min-height:0px;
-  padding:5px 45px 5px 50px;
-  width:100%;
-}
-#ib4ft{
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-  min-height:0px;
-  padding:5px 0px 5px 25px;
-  flex-direction:column;
-  border:1px solid rgba(0,0,0,0.75);
-  border-radius:10px 10px 10px 10px;
-}
-#ihmp9{
-  font-size:20px;
-  padding:0 0 0 0px;
-}
-#isq56{
-  width:60px;
-}
-#in2xe{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  min-height:0px;
-  padding:5px 45px 5px 50px;
-  width:100%;
-}
-#iwoon{
-  font-size:20px;
-  padding:0 0 0 0px;
-}
-#igmrl{
-  width:60px;
-}
-#iz1mf{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  min-height:0px;
-  padding:5px 45px 5px 50px;
-  width:100%;
-}
-#iab1h{
-  font-size:20px;
-  padding:0 0 0 0px;
-}
-#iwtzr{
-  width:60px;
-}
-#idnao{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  min-height:0px;
-  padding:5px 45px 5px 50px;
-  width:100%;
-}
-#i59fd:hover{
-  background-repeat:repeat;
-  background-position:left top;
-  background-attachment:scroll;
-  background-size:auto;
-  background-image:linear-gradient(rgba(83,0,0,0.17) 0%, rgba(83,0,0,0.17) 100%);
-}
-#ihqmx:hover{
-  background-repeat:repeat;
-  background-position:left top;
-  background-attachment:scroll;
-  background-size:auto;
-  background-image:linear-gradient(rgba(83,0,0,0.17) 0%, rgba(83,0,0,0.17) 100%);
-}
-#ib4ft:hover{
-  background-repeat:repeat;
-  background-position:left top;
-  background-attachment:scroll;
-  background-size:auto;
-  background-image:linear-gradient(rgba(83,0,0,0.17) 0%, rgba(83,0,0,0.17) 100%);
-}
-#iy60k{
-  flex-direction:column;
-  width:60%;
-  height:100%;
-  flex:1 0 60%;
-  border:2.5px solid #151515;
-}
-#iyve1{
-  flex:1 0 25%;
-  border:1.5px solid rgba(0,0,0,0.95);
-}
-#iovdx{
-  flex:1 0 75;
-}
-#i99h1{
-  width:100%;
-  height:100%;
-  flex-direction:column-reverse;
-  padding:0px 5px 5px 5px;
-}
-#ixtnf{
-  min-height:20px;
-  height:20px;
-  flex:1 0 15px;
-  display:flex;
-  justify-content:center;
-}
-#i00e6{
-  border:1.5px solid rgba(0,0,0,0.95);
-  margin:0px 0px 5px 0px;
-}
-#ixsw5{
-  padding:0px 4px 0px 0px;
-}
-#iefjh{
-  width:50px;
-}
-#i70n6{
-  padding:0px 4px 0px 25px;
-}
-#ig71d{
-  width:50px;
-}
-#iys3d{
-  width:50px;
-}
-#iod3h{
-  padding:0px 4px 0px 25px;
-}
-@media (max-width: 768px){
-  .gjs-row{
-    flex-wrap:wrap;
-  }
-}
-</style>
-<!-- import plotly.js -->
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/Public/style.css">
 
-<script>
-// plotly.js here
-// we are going to do a cartesian plot
+        <!-- import plotly.js -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="ivpq" class="gjs-row">
+            <div id="iumi" class="gjs-cell">
+                <div id="iyvn">Trem Viajante
+                </div>
+                <div id="i8u2" class="gjs-row">
+                    <div id="ig0g" class="gjs-cell">
+                        <div id="i9ck">Métodos:
+                        </div>
+                        <div id="iirwi" class="gjs-row">
+                            <div id="i59fd" class="gjs-cell">
+                                <div class="gjs-cell" id="ihnrj">
+                                    <img src="/Public/Images/MinhaBola.png"
+                                        id="ibqbh"/>
+                                    <div id="imxmj">Subida de encosta
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gjs-cell" id="ihqmx">
+                                <div class="gjs-cell" id="ixkyf">
+                                    <img src="/Public/Images/MinhaBola.png"
+                                        id="iqce3"/>
+                                    <div id="i8251">Subida de encosta alternada
+                                    </div>
+                                </div>
+                                <div class="gjs-cell" id="idnao">
+                                    <div id="iab1h">Tentativas:
+                                    </div>
+                                    <input type="number" id="iwtzr"
+                                        name="attempts" value="3"/>
+                                </div>
+                            </div>
+                            <div class="gjs-cell" id="ib4ft">
+                                <div class="gjs-cell" id="i0bpt">
+                                    <img src="/Public/Images/MinhaBola.png"
+                                        id="idb1n"/>
+                                    <div id="i9fiq">Tempera simulada
+                                    </div>
+                                </div>
+                                <div class="gjs-cell" id="iyzli">
+                                    <div id="iryyf">Temperatura inicial:
+                                    </div>
+                                    <input type="number" id="iqejc"
+                                        name="tInit" value="900.0"/>
+                                </div>
+                                <div class="gjs-cell" id="in2xe">
+                                    <div id="ihmp9">Numero de interações:
+                                    </div>
+                                    <input type="number" id="isq56"
+                                        name="nInteracao" value="15"/>
+                                </div>
+                                <div class="gjs-cell" id="iz1mf">
+                                    <div id="iwoon">Fator redutor:
+                                    </div>
+                                    <input type="number" id="igmrl"
+                                        name="fator" value="0.94"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gjs-row" id="iy60k">
+                        <div class="gjs-cell" id="iovdx">
+                            <div class="gjs-row" id="i99h1">
+                                <div class="gjs-cell" id="i00e6"
+                                    style="position: relative;">
+                                    <div id="plotly" style=" position: absolute;
+                                        width: 100%; height: 100%;"></div>
+                                </div>
+                                <div class="gjs-cell" id="ixtnf">
+                                    <div id="ixsw5">Tamanho de plano:
+                                    </div>
+                                    <input type="number" id="ig71d"
+                                        name="nPlano" value="10"/>
+                                    <div id="i70n6">Numero de pontos:
+                                    </div>
+                                    <input type="number" id="iefjh"
+                                        name="nPontos" value="6"/>
+                                    <div id="iod3h">Seed:
+                                    </div>
+                                    <input type="number" id="iys3d"
+                                        name="seed" value="153"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gjs-cell" id="iyve1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 
-const x = [1, 2, 3, 4, 3, 2, 1];
-const y = [10, 15, 13, 17, 8, 12, 5];
-
-var trace1 = {
-x: x,
-y: y,
-mode: 'markers',
-type: 'scatter',
-// color
-marker: {
-  color: 'rgb(255, 0, 0)',
-  size: 10
-}
-};
-
-// we are going to connect the dots
-
-const x_line = []
-const y_line = []
-
-// we want to connect ALL dots, as this is a TSP algorithm
-for (let i = 0; i < x.length; i++) {
-for (let j = 0; j < x.length; j++) {
-  if (i != j) {
-    x_line.push(x[i])
-    y_line.push(y[i])
-    x_line.push(x[j])
-    y_line.push(y[j])
-    x_line.push(null)
-    y_line.push(null)
-  }
-}
-}
-
-var trace2 = {
-x: x_line,
-y: y_line,
-mode: 'lines',
-type: 'scatter',
-// color
-marker: {
-  color: 'rgb(0, 0, 255)',
-  size: 10
-}
-};
-
-var data = [trace2, trace1];
-
-// layout to automatically resize the plot
-var layout = {
-  autosize: true,
-  responsive: true,
-
-  xaxis: {
-    showgrid: false,
-    zeroline: false
-  },
-};
-
-Plotly.newPlot('plotly', data, layout);
-
-</script>
+    <script src="/Public/script.js"></script>
+</html>
