@@ -8,14 +8,16 @@ class Environment:
     distance_matrix = []
     trains_points = []
     index_numbers_list = []
+    maximum_attempts = 1
 
-    def __init__(self, number_of_points, cartesian_size = 10, seed = None):
+    def __init__(self, number_of_points, cartesian_size = 10, seed = None, maximum_attempts = 1):
 
         if(seed == None):
             seed = random.randrange(1,1000)
             
         random.seed(seed)
 
+        self.maximum_attempts = maximum_attempts
         self.number_of_points = number_of_points
         self.cartesian_size = cartesian_size
 
@@ -69,5 +71,5 @@ class Environment:
             self.distance_matrix.append(coordinate_row)
 
 
-        self.trains_points = random.sample(self.coordinate_list.keys(), 3)
+        self.trains_points = random.sample(list(self.coordinate_list.keys()), 3)
 

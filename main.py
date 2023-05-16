@@ -2,7 +2,7 @@
 from Environment import Environment
 from HillClimb import HillClimb
 
-environment = Environment(6, 10, 15)
+environment = Environment(6, 10, 351, 150)
 
 environment.create_environment()
 
