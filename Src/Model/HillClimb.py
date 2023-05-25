@@ -38,6 +38,7 @@ class HillClimb:
             trains_infos[i] = {
                 "init_point": current_environment.coordinate_list[current_environment.trains_points[i]],
                 "solution_value": value,
+                "solution_full": solution,
                 "solution": solution_coordinates
             }
         
@@ -48,6 +49,7 @@ class HillClimb:
             "distance_matrix": current_environment.distance_matrix,
             "trains_infos": trains_infos
         }
+        
 
         return json
 

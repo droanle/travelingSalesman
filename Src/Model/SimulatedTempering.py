@@ -31,6 +31,7 @@ class SimulatedTempering:
             trains_infos[i] = {
                 "init_point": current_environment.coordinate_list[current_environment.trains_points[i]],
                 "solution_value": value,
+                "solution_full": solution,
                 "temp": temp,
                 "gain": gain,
                 "solution": solution_coordinates
@@ -92,14 +93,15 @@ class SimulatedTempering:
 
             delta_expo = new_value - current_value
 
-            if delta_expo < 0 or random.random() < math.exp(-delta_expo / temperature):
+            if delta_expo < 0:
                 current_solution = deepcopy(new_solution)
                 current_value = new_value
 
-            if new_value < final_value:
-                best_solution = deepcopy(new_solution)
-                final_value = new_value
-            
+            else:
+                if random.uniform(0,1) < math.exp(-delta_expo / temperature):
+                    best_solution = deepcopy(new_solution)
+                    final_value = new_value
+            #verificar a temperatura 
             temperature *= reducing_factor
 
         gain = (current_value-final_value)/current_value

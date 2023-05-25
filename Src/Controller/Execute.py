@@ -11,11 +11,10 @@ def hillclimb():
   nPontos = request.args.get('nPontos', type=int)
   seed = request.args.get('seed', type=int)
 
-
   if seed == 0: 
-    environment = Environment(nPlano, nPontos)
+    environment = Environment(nPontos, nPlano)
   else:
-    environment = Environment(nPlano, nPontos, seed)
+    environment = Environment(nPontos, nPlano, seed)
 
   environment.create_environment()
 
@@ -32,7 +31,10 @@ def hillclimbAlternating():
   seed = int(request.args.get('seed'))
   attempts = int(request.args.get('attempts'))
 
-  environment = Environment(nPontos, nPlano, seed, attempts)
+  if seed == 0: 
+    environment = Environment(nPontos, nPlano, None, attempts)
+  else:
+    environment = Environment(nPontos, nPlano, seed, attempts)
 
   environment.create_environment()
 
@@ -51,7 +53,10 @@ def simulatedseasoning():
   cooling_rate = int(request.args.get('cooling_rate'))
   iterations = int(request.args.get('iterations'))
 
-  environment = Environment(nPontos, nPlano, seed)
+  if seed == 0: 
+    environment = Environment(nPontos, nPlano)
+  else:
+    environment = Environment(nPontos, nPlano, seed)
 
   environment.create_environment()
     

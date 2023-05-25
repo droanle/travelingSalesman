@@ -22,6 +22,10 @@ class Display {
 
   destruct() {
     this.father.innerHTML = "";
+
+    document.getElementById("t0").value = "";
+    document.getElementById("t1").value = "";
+    document.getElementById("t2").value = "";
   }
 
   repar() {
@@ -96,6 +100,14 @@ class Display {
           size: 10,
         },
       });
+
+      var text =
+        "Solucão: " +
+        data.trains_infos[key].solution_full +
+        "  Custo: " +
+        data.trains_infos[key].solution_value;
+
+      document.getElementById("t" + key).innerHTML = text;
     }
 
     var layout = {
@@ -160,7 +172,8 @@ EventHandler = {
     }
 
     if (exito) {
-      makeRequest("../hillclimb/", "GET", data, (res) => {
+      data["attempts"] = attempts;
+      makeRequest("../hillclimb/alternating", "GET", data, (res) => {
         display.render(res);
       });
     }
@@ -173,13 +186,23 @@ EventHandler = {
     cooling_rate = document.getElementById("isq56").value;
     iterations = document.getElementById("iwtzr").value;
 
-    if (attempts == "" || attempts == null) {
-      alert('O campo "Tentativas" não pode estar vazio');
+    if (initial_temperature == "" || initial_temperature == null) {
+      alert('O campo "initial_temperature" não pode estar vazio');
+      exito = false;
+    } else if (cooling_rate == "" || cooling_rate == null) {
+      alert('O campo "cooling_rate" não pode estar vazio');
+      exito = false;
+    } else if (iterations == "" || iterations == null) {
+      alert('O campo "iterations" não pode estar vazio');
       exito = false;
     }
 
     if (exito) {
-      makeRequest("../hillclimb/", "GET", data, (res) => {
+      data["initial_temperature"] = initial_temperature;
+      data["cooling_rate"] = cooling_rate;
+      data["iterations"] = iterations;
+
+      makeRequest("../simulatedseasoning", "GET", data, (res) => {
         display.render(res);
       });
     }
@@ -194,63 +217,6 @@ document
   .getElementById("iqce3")
   .addEventListener("click", EventHandler.AlternateHillClimb);
 
-const x = [1, 2, 3, 4, 3, 2, 1];
-const y = [10, 15, 13, 17, 8, 12, 5];
-
-var trace1 = {
-  x: x,
-  y: y,
-  mode: "markers",
-  type: "scatter",
-  // color
-  marker: {
-    color: "rgb(255, 0, 0)",
-    size: 10,
-  },
-};
-
-// we are going to connect the dots
-
-const x_line = [];
-const y_line = [];
-
-// we want to connect ALL dots, as this is a TSP algorithm
-for (let i = 0; i < x.length; i++) {
-  for (let j = 0; j < x.length; j++) {
-    if (i != j) {
-      x_line.push(x[i]);
-      y_line.push(y[i]);
-      x_line.push(x[j]);
-      y_line.push(y[j]);
-      x_line.push(null);
-      y_line.push(null);
-    }
-  }
-}
-
-var trace2 = {
-  x: x_line,
-  y: y_line,
-  mode: "lines",
-  type: "scatter",
-  // color
-  marker: {
-    color: "rgb(0, 0, 255)",
-    size: 10,
-  },
-};
-
-var data = [trace2, trace1];
-
-// layout to automatically resize the plot
-var layout = {
-  autosize: true,
-  responsive: true,
-
-  xaxis: {
-    showgrid: false,
-    zeroline: false,
-  },
-};
-
-Plotly.newPlot("plotly", data, layout);
+document
+  .getElementById("idb1n")
+  .addEventListener("click", EventHandler.SimulatedTempering);
