@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, jsonify
 from Src.Model.Environment import Environment
 from Src.Model.SimulatedTempering import SimulatedTempering
 from Src.Model.HillClimb import HillClimb
+from Src.Model.GeneticAlgorithm import GeneticAlgorithm
 
 Execute = Blueprint('Execute', __name__)
 
@@ -63,3 +64,24 @@ def simulatedseasoning():
   simulatedTempering = SimulatedTempering(environment)
   simulatedTempering.base_simulated_tempering(initial_temperature, cooling_rate, iterations)
   return jsonify(simulatedTempering.export_json())
+
+# this doesnt actually work yet 20/06/2023
+@Execute.route('/genetic_algorithm')
+def genetic_algorithm_execution():
+  nPlano          = int(request.args.get('nPlano'))
+  nPontos         = int(request.args.get('nPontos'))
+  seed            = int(request.args.get('seed'))
+  population_size = int(request.args.get('population_size'))
+  mutation_rate   = float(request.args.get('mutation_rate'))
+  generations     = int(request.args.get('generations'))
+
+  if seed == 0: 
+    environment = Environment(nPontos, nPlano)
+  else:
+    environment = Environment(nPontos, nPlano, seed)
+
+  environment.create_environment()
+    
+  geneticAlgorithm = GeneticAlgorithm(environment)
+  geneticAlgorithm.base_genetic_algorithm(population_size, mutation_rate, generations)
+  return jsonify(geneticAlgorithm.export_json())
