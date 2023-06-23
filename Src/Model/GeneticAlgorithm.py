@@ -31,7 +31,7 @@ class GeneticAlgorithm:
     self.current_population = []
     self.generational_fitness = []
 
-  def export_json(self):
+  def export_json(self): 
 
     current_environment = self.environment
     trains_infos = {}

@@ -92,8 +92,9 @@ def genetic_algorithm_execution():
   else:
     environment = Environment(nPontos, nPlano, seed)
 
-  environment.create_environment()
+  environment = Environment(10)
 
+  environment.create_environment()
   geneticAlgorithm = GeneticAlgorithm(environment, gene_size, population_size,
                                       number_generations, crossbreeding_rate,
                                       mutation_rate, generation_interval)

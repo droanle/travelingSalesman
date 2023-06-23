@@ -207,6 +207,50 @@ EventHandler = {
       });
     }
   },
+
+  GeneticAlgorithm: () => {
+    [exito, data] = EventHandler.getSetup();
+
+    gene_size = document.getElementById("gene_size").value;
+    population_size = document.getElementById("population_size").value;
+    number_generations = document.getElementById("number_generations").value;
+    crossbreeding_rate = document.getElementById("crossbreeding_rate").value;
+    mutation_rate = document.getElementById("mutation_rate").value;
+    generation_interval = document.getElementById("generation_interval").value;
+
+    if (gene_size == "" || gene_size == null) {
+      alert('O campo "gene_size" não pode estar vazio');
+      exito = false;
+    } else if (population_size == "" || population_size == null) {
+      alert('O campo "population_size" não pode estar vazio');
+      exito = false;
+    } else if (number_generations == "" || number_generations == null) {
+      alert('O campo "number_generations" não pode estar vazio');
+      exito = false;
+    } else if (crossbreeding_rate == "" || crossbreeding_rate == null) {
+      alert('O campo "crossbreeding_rate" não pode estar vazio');
+      exito = false;
+    } else if (mutation_rate == "" || mutation_rate == null) {
+      alert('O campo "mutation_rate" não pode estar vazio');
+      exito = false;
+    } else if (generation_interval == "" || generation_interval == null) {
+      alert('O campo "generation_interval" não pode estar vazio');
+      exito = false;
+    }
+
+    if (exito) {
+      data["gene_size"] = gene_size;
+      data["population_size"] = population_size;
+      data["number_generations"] = number_generations;
+      data["crossbreeding_rate"] = crossbreeding_rate;
+      data["mutation_rate"] = mutation_rate;
+      data["generation_interval"] = generation_interval;
+
+      makeRequest("../genetic_algorithm", "GET", data, (res) => {
+        display.render(res);
+      });
+    }
+  },
 };
 
 document
@@ -220,3 +264,7 @@ document
 document
   .getElementById("idb1n")
   .addEventListener("click", EventHandler.SimulatedTempering);
+
+document
+  .getElementById("ib4ftuuu")
+  .addEventListener("click", EventHandler.GeneticAlgorithm);

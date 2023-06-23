@@ -10,6 +10,7 @@ app = Flask(__name__,
             static_folder='Public')
 app.register_blueprint(Router)
 
+print(template_dir)
 if __name__ == '__main__':
   app.app_context().push()
   app.run(debug=True, host='0.0.0.0', port=5001)
